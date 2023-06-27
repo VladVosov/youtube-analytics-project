@@ -3,6 +3,7 @@ import os
 import apiclient
 from googleapiclient.discovery import build
 
+
 class Channel:
     """Класс для ютуб-канала"""
     # YT_API_KEY скопирован из гугла и вставлен в переменные окружения
@@ -14,13 +15,13 @@ class Channel:
         """Экземпляр инициализируется id канала. Дальше все данные будут подтягиваться по API."""
         self.__channel_id = channel_id
         self.channel = self.youtube.channels().list(id=self.__channel_id, part='snippet,statistics').execute()
-        self.id = self.channel["items"][0]["id"] #id канала
-        self.title = self.channel["items"][0]["snippet"]["title"] #название канала
-        self.description = self.channel["items"][0]["snippet"]["description"] #описание канала
-        self.url = self.channel["items"][0]["snippet"]["thumbnails"]["default"]["url"] #ссылка на канал
-        self.subscriber_count = self.channel["items"][0]["statistics"]["subscriberCount"] #количество подписчиков
-        self.video_count = self.channel["items"][0]["statistics"]["videoCount"] #количество видео
-        self.view_count = self.channel["items"][0]["statistics"]["viewCount"] #общее количество просмотров
+        self.id = self.channel["items"][0]["id"]  # id канала
+        self.title = self.channel["items"][0]["snippet"]["title"]  # название канала
+        self.description = self.channel["items"][0]["snippet"]["description"]  # описание канала
+        self.url = self.channel["items"][0]["snippet"]["thumbnails"]["default"]["url"]  # ссылка на канал
+        self.subscriber_count = self.channel["items"][0]["statistics"]["subscriberCount"]  # количество подписчиков
+        self.video_count = self.channel["items"][0]["statistics"]["videoCount"]  # количество видео
+        self.view_count = self.channel["items"][0]["statistics"]["viewCount"]  # общее количество просмотров
 
     def __str__(self):
         return f"{self.title} ({self.url})"
@@ -69,4 +70,3 @@ class Channel:
     @classmethod
     def get_service(cls):
         return apiclient
-
